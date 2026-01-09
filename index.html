@@ -1,95 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Navbar Scroll</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIMEX 2K26</title>
 
-    <style>
-        html {
-            scroll-behavior: smooth; /* 🔥 smooth scroll */
-        }
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=EB+Garamond&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        /* Navbar */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #222;
-            padding: 15px;
-            text-align: center;
-        }
+body{
+    font-family:'EB Garamond', serif;
+    color:#fff;
+    overflow-x:hidden;
+}
 
-        nav a {
-            color: white;
-            margin: 0 20px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+/* ===== VIDEO BACKGROUND ===== */
+#background{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    overflow:hidden;
+}
 
-        nav a:hover {
-            color: #0a66c2;
-        }
+#background video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
-        /* Sections */
-        section {
-            padding: 100px 20px;
-            min-height: 100vh;
-        }
+/* OVERLAY */
+#background::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.45);
+}
 
-        #home {
-            background-color: #f4f6f8;
-            margin-top: 60px;
-        }
+/* ===== NAVBAR ===== */
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:14px 40px;
+    display:grid;
+    grid-template-columns:auto 1fr auto auto;
+    align-items:center;
 
-        #about {
-            background-color: #e3e7eb;
-        }
+    background:
+        linear-gradient(
+            90deg,
+            rgba(20,25,60,.85),
+            rgba(20,80,120,.65),
+            rgba(20,25,60,.85)
+        );
 
-        #services {
-            background-color: #d5dbe0;
-        }
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(76,201,240,.25);
+    z-index:1000;
+}
 
-        footer {
-            background-color: #222;
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-        }
-    </style>
+/* LEFT LOGO */
+.logo{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.4);
+}
+.logo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* CENTER LOGO */
+.nav-title{
+    text-align:center;
+}
+.nav-title img{
+    height:50px;
+    max-width:180px;
+    object-fit:contain;
+}
+
+/* MENU */
+.menu{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.4);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+
+    position:absolute;
+    right:20px;
+    bottom:-55px;
+    background:rgba(5,10,25,.9);
+}
+
+.menu span,
+.menu span::before,
+.menu span::after{
+    content:"";
+    width:18px;
+    height:2px;
+    background:#fff;
+    position:relative;
+}
+.menu span::before{ top:-6px; position:absolute; }
+.menu span::after{ top:6px; position:absolute; }
+
+/* RIGHT SIDE IMAGE (NOT LOGO STYLE) */
+.right-logo{
+    width:auto;                 /* remove forced square */
+    height:60px;                /* image-like height */
+    border-radius:8px;          /* slight rounding, not logo */
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.25);
+    margin-left:20px;
+    background:rgba(0,0,0,.2);
+}
+
+.right-logo img{
+    height:100%;
+    width:auto;
+    object-fit:contain;         /* looks like image/banner */
+}
+
+/* MENU DROPDOWN */
+.menu-dropdown{
+    position:absolute;
+    top:52px;
+    left:0;
+    background:rgba(5,10,25,.95);
+    border:1px solid rgba(76,201,240,.35);
+    border-radius:16px;
+    padding:15px;
+    display:none;
+    flex-direction:column;
+    gap:12px;
+    min-width:180px;
+}
+.menu-dropdown.show{ display:flex; }
+
+.menu-dropdown button{
+    font-family:'Cinzel', serif;
+    letter-spacing:2px;
+    padding:10px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.35);
+    background:transparent;
+    color:white;
+    cursor:pointer;
+}
+.menu-dropdown button:hover{
+    background:#4cc9f0;
+    color:#000;
+}
+
+/* HERO */
+.hero{
+    min-height:80vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:0 20px;
+    padding-top:140px;
+}
+.hero h1{
+    font-family:'UnifrakturCook', cursive;
+    font-size:clamp(3rem,8vw,7rem);
+    margin-bottom:20px;
+}
+.hero p{
+    max-width:700px;
+    line-height:1.7;
+    font-size:1.15rem;
+}
+
+/* SECTIONS */
+section{
+    padding:100px 10%;
+}
+.section-title{
+    font-family:'Cinzel', serif;
+    letter-spacing:4px;
+    text-align:center;
+    margin-bottom:40px;
+    font-size:1.8rem;
+}
+
+/* BUTTONS */
+.explore-btn,
+.dept-btn,
+.college-btn{
+    margin-top:30px;
+    padding:12px 32px;
+    font-family:'Cinzel', serif;
+    letter-spacing:2px;
+    border-radius:26px;
+    border:2px solid;
+    background:transparent;
+    font-size:1rem;
+    cursor:pointer;
+}
+
+.explore-btn{
+    display:block;
+    margin:0 auto 60px;
+    border-color:#4cc9f0;
+    color:#4cc9f0;
+}
+.explore-btn:hover{
+    background:#4cc9f0;
+    color:#000;
+}
+
+.dept-btn{
+    border-color:#f72585;
+    color:#f72585;
+}
+.dept-btn:hover{
+    background:#f72585;
+    color:#000;
+}
+
+.college-btn{
+    border-color:#ffd166;
+    color:#ffd166;
+}
+.college-btn:hover{
+    background:#ffd166;
+    color:#000;
+}
+
+.about-frame{
+    max-width:900px;
+    margin:0 auto;
+    padding:45px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:24px;
+    backdrop-filter:blur(8px);
+    text-align:center;
+    line-height:1.8;
+    font-size:1.05rem;
+}
+
+.contact{text-align:center;}
+.contact a{
+    color:#4cc9f0;
+    text-decoration:none;
+    display:block;
+    margin:8px 0;
+}
+.contact a:hover{
+    text-decoration:underline;
+}
+
+footer{
+    padding:30px;
+    background:rgba(0,0,0,.7);
+    text-align:center;
+    font-size:.9rem;
+    opacity:.8;
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Navbar -->
-    <nav>
-        <a href="#home">Home</a>
-        <a href="AIMEX.html">AIMEX</a>
-        <a href="#services">Services</a>
-        <a href="https://forms.gle/RXxoQG8RKW5qtma48">Contact Us</a>
-    </nav>
+<!-- VIDEO BACKGROUND -->
+<div id="background">
+    <video autoplay muted loop playsinline>
+        <source src="main1.mp4" type="video/mp4">
+    </video>
+</div>
 
-    <!-- Sections -->
-    <section id="home">
-        <h1>Home</h1>
-        <p>This is the home section.</p>
-    </section>
+<!-- NAVBAR -->
+<nav>
+    <div class="logo"><img src="Institute-Logo.jpeg"></div>
+    <div class="nav-title"><img src="AIMEXLOGO.jpeg"></div>
 
-    <section id="about">
-        <h1>About</h1>
-        <p>This is the about section.</p>
-    </section>
+    <div class="menu" id="menuBtn">
+        <span></span>
+        <div class="menu-dropdown" id="menuDropdown">
+            <button id="homeBtn">Home</button>
+            <button id="aboutBtn">About</button>
+            <button id="eventsBtn">Events</button>
+            <button id="contactBtn">Contact</button>
+        </div>
+    </div>
 
-    <section id="services">
-        <h1>Services</h1>
-        <p>This is the services section.</p>
-    </section>
+    <!-- RIGHT SIDE IMAGE -->
+    <div class="right-logo">
+        <img src="27.jpeg">
+    </div>
+</nav>
 
-    <!-- Footer / Contact -->
+<!-- HERO -->
+<section class="hero">
+    <div>
+        <h1>AiMEX 2K26</h1>
+        <p>Where Artificial Intelligence meets Innovation.
+        Join the future of technology, creativity, and competition.
+        Empowering minds with AI & Machine Learning.</p>
+    </div>
+</section>
+
+<section>
+    <a href="eventslists.html"><button class="explore-btn">Explore Events</button></a>
+</section>
+
+<section id="aboutSection">
+    <div class="section-title">About AIMEX</div>
+    <div class="about-frame">
+       The AIMEX event is a one-day technical symposium organized by the Department of Computer Science and Engineering (Artificial Intelligence and Machine Learning), which was established in the year 2023.
+    </div>
+</section>
+
+<section>
+    <div class="section-title">About the Department</div>
+    <div class="about-frame">
+        The Department of CSE (AI & ML) prepares students for future technologies.
+        <br>
+        <a href="https://mits.ac.in/cse-ai-ml" target="_blank">
+            <button class="dept-btn">Visit Department Site</button>
+        </a>
+    </div>
+</section>
+
+<section>
+    <div class="section-title">About Our College</div>
+    <div class="about-frame">
+        <strong>Madanapalle Institute of Technology & Science (MITS)</strong>
+        <br>
+        <a href="https://mits.ac.in" target="_blank">
+            <button class="college-btn">Visit College Website</button>
+        </a>
+    </div>
+</section>
+
+<section class="contact" id="contactSection">
+    <div class="section-title">Contact Us</div>
+    <a href="https://mits.ac.in" target="_blank">🌐 www.mits.ac.in</a>
+    <a href="https://instagram.com/aimex_2k26" target="_blank">📸 Instagram: aimex_2k26</a>
+    <a href="mailto:aimex2k26@gmail.com">📧 Email: aimex2k26@gmail.com</a>
+    <a href="tel:1231231231">📞 Phone: 1231231231</a>
+</section>
+
+<footer>© 2026 AIMEX-MITS</footer>
+
+<script>
+menuBtn.onclick = () => menuDropdown.classList.toggle("show");
+
+eventsBtn.onclick = () => window.location.href = "eventslists.html";
+
+aboutBtn.onclick = () => {
+    menuDropdown.classList.remove("show");
+    document.getElementById("aboutSection").scrollIntoView({ behavior: "smooth" });
+};
+
+homeBtn.onclick = () => {
+    menuDropdown.classList.remove("show");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+contactBtn.onclick = () => {
+    menuDropdown.classList.remove("show");
+    document.getElementById("contactSection").scrollIntoView({ behavior: "smooth" });
+};
+</script>
 
 </body>
 </html>
