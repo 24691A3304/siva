@@ -43,27 +43,29 @@ body{
     background:rgba(0,0,0,.45);
 }
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR - MULTI-COLOR GRADIENT ===== */
 nav{
     position:fixed;
     top:0;
     width:100%;
     padding:14px 40px;
     display:grid;
-    grid-template-columns:auto 1fr auto auto;
+    grid-template-columns:auto 1fr auto;
     align-items:center;
-
+    /* Multi-color gradient that complements the dark video background */
     background:
         linear-gradient(
             90deg,
-            rgba(20,25,60,.85),
-            rgba(20,80,120,.65),
-            rgba(20,25,60,.85)
+            rgba(32, 0, 71, 0.9),    /* Cyan */
+            rgba(220, 0, 132, 0.85),   /* Purple */
+            rgba(255, 209, 102, 0.9),   /* Gold */
+            rgba(245, 37, 133, 0.85),   /* Pink */
+            rgba(1, 28, 46, 0.9)      /* Deep Blue */
         );
-
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid rgba(76,201,240,.25);
+    backdrop-filter:blur(12px);
+    border-bottom:2px solid rgba(255,255,255,0.3);
     z-index:1000;
+    box-shadow:0 4px 20px rgba(76,201,240,0.3);
 }
 
 /* LEFT LOGO */
@@ -72,7 +74,7 @@ nav{
     height:70px;
     border-radius:50%;
     overflow:hidden;
-    border:1px solid rgba(255,255,255,.4);
+    border:2px solid rgba(255,255,255,0.6);
 }
 .logo img{
     width:100%;
@@ -90,21 +92,48 @@ nav{
     object-fit:contain;
 }
 
-/* MENU */
+/* RIGHT SIDE CONTAINER */
+.right-container{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    position:relative;
+}
+
+/* RIGHT SIDE IMAGE */
+.right-logo{
+    width:auto;
+    height:60px;
+    border-radius:8px;
+    overflow:hidden;
+    border:2px solid rgba(255,255,255,0.4);
+    background:rgba(255,255,255,0.1);
+}
+
+.right-logo img{
+    height:100%;
+    width:auto;
+    object-fit:contain;
+}
+
+/* MENU BUTTON - POSITIONED BELOW RIGHT LOGO */
 .menu{
     width:40px;
     height:40px;
     border-radius:50%;
-    border:1px solid rgba(255,255,255,.4);
+    border:2px solid rgba(255,255,255,0.6);
     display:flex;
     align-items:center;
     justify-content:center;
     cursor:pointer;
+    background:linear-gradient(45deg, rgba(76,201,240,0.9), rgba(255,209,102,0.9));
+    margin-left:0;
+    box-shadow:0 4px 12px rgba(76,201,240,0.4);
+}
 
-    position:absolute;
-    right:20px;
-    bottom:-55px;
-    background:rgba(5,10,25,.9);
+.menu:hover{
+    transform:scale(1.05);
+    box-shadow:0 6px 20px rgba(76,201,240,0.6);
 }
 
 .menu span,
@@ -113,58 +142,50 @@ nav{
     content:"";
     width:18px;
     height:2px;
-    background:#fff;
+    background:#000;
     position:relative;
 }
 .menu span::before{ top:-6px; position:absolute; }
 .menu span::after{ top:6px; position:absolute; }
 
-/* RIGHT SIDE IMAGE (NOT LOGO STYLE) */
-.right-logo{
-    width:auto;                 /* remove forced square */
-    height:60px;                /* image-like height */
-    border-radius:8px;          /* slight rounding, not logo */
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.25);
-    margin-left:20px;
-    background:rgba(0,0,0,.2);
-}
-
-.right-logo img{
-    height:100%;
-    width:auto;
-    object-fit:contain;         /* looks like image/banner */
-}
-
-/* MENU DROPDOWN */
+/* MENU DROPDOWN - LEFT ALIGNED */
 .menu-dropdown{
     position:absolute;
-    top:52px;
-    left:0;
-    background:rgba(5,10,25,.95);
-    border:1px solid rgba(76,201,240,.35);
+    top:70px;
+    right:0;
+    background:linear-gradient(145deg, rgba(5,10,25,0.98), rgba(20,25,60,0.95));
+    border:2px solid rgba(76,201,240,0.5);
     border-radius:16px;
     padding:15px;
     display:none;
     flex-direction:column;
     gap:12px;
     min-width:180px;
+    box-shadow: 0 10px 30px rgba(76,201,240,0.3);
+    transform:translateX(-100%);
 }
-.menu-dropdown.show{ display:flex; }
+.menu-dropdown.show{ 
+    display:flex;
+    transform:translateX(0);
+}
 
 .menu-dropdown button{
     font-family:'Cinzel', serif;
     letter-spacing:2px;
     padding:10px;
     border-radius:20px;
-    border:1px solid rgba(255,255,255,.35);
-    background:transparent;
+    border:1px solid rgba(255,255,255,0.5);
+    background:linear-gradient(45deg, rgba(76,201,240,0.1), rgba(255,209,102,0.1));
     color:white;
     cursor:pointer;
+    width:100%;
+    text-align:left;
+    transition:all 0.3s ease;
 }
 .menu-dropdown button:hover{
-    background:#4cc9f0;
+    background:linear-gradient(45deg, #4cc9f0, #ffd166);
     color:#000;
+    transform:translateX(5px);
 }
 
 /* HERO */
@@ -198,6 +219,66 @@ section{
     text-align:center;
     margin-bottom:40px;
     font-size:1.8rem;
+}
+
+/* EVENT HIGHLIGHTS - CENTERED PERFECTLY */
+#eventHighlights{
+    scroll-margin-top: 120px;
+    max-width:900px;
+    margin:0 auto 60px;
+    padding:45px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:24px;
+    backdrop-filter:blur(8px);
+    text-align:center;
+}
+
+.scroller-title{
+    font-family:'Cinzel', serif;
+    letter-spacing:3px;
+    margin-bottom:35px;
+    font-size:1.6rem;
+}
+
+.image-scroller{
+    width:100%;
+    height:280px;
+    overflow:hidden;
+    position:relative;
+    border-radius:16px;
+    background:rgba(0,0,0,.3);
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.scroller-track{
+    display:flex;
+    height:100%;
+    animation: scrollImages 15s linear infinite;
+    gap:20px;
+    padding:10px;
+}
+
+.scroller-track:hover{
+    animation-play-state: paused;
+}
+
+.scroller-track img{
+    height:100%;
+    flex:0 0 280px;
+    object-fit:cover;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.2);
+    box-shadow: 0 8px 25px rgba(0,0,0,.4);
+}
+
+@keyframes scrollImages{
+    0%{ transform: translateX(0); }
+    100%{ transform: translateX(-50%); }
+}
+
+.scroller-track{
+    width:900%;
 }
 
 /* BUTTONS */
@@ -257,12 +338,59 @@ section{
     font-size:1.05rem;
 }
 
-.contact{text-align:center;}
+/* CONTACT SECTION STYLES */
+.contact{
+    text-align:center;
+    max-width:900px;
+    margin:0 auto;
+}
+.contact .map-container{
+    margin:40px auto;
+    width:300px;
+    height:200px;
+    border-radius:16px;
+    overflow:hidden;
+    border:2px solid rgba(255,255,255,.3);
+    box-shadow:0 8px 25px rgba(0,0,0,.4);
+    cursor:pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+.contact .map-container:hover{
+    transform: translateY(-5px);
+    box-shadow:0 15px 35px rgba(76,201,240,.3);
+    border-color:#4cc9f0;
+}
+.contact .map-container::after{
+    content: "Click for Directions";
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(76,201,240,0.9);
+    color: #000;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.contact .map-container:hover::after{
+    opacity: 1;
+}
+.contact .map-image{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 .contact a{
     color:#4cc9f0;
     text-decoration:none;
     display:block;
     margin:8px 0;
+    font-size:1.1rem;
 }
 .contact a:hover{
     text-decoration:underline;
@@ -283,28 +411,31 @@ footer{
 <!-- VIDEO BACKGROUND -->
 <div id="background">
     <video autoplay muted loop playsinline>
-        <source src="main1.mp4" type="video/mp4">
+        <source src="main-bg1.mp4" type="video/mp4">
     </video>
 </div>
 
 <!-- NAVBAR -->
 <nav>
-    <div class="logo"><img src="Institute-Logo.jpeg"></div>
-    <div class="nav-title"><img src="AIMEXLOGO.jpeg"></div>
+    <div class="logo"><img src="Institute-Logo.jpeg" alt="Institute-LOGO"></div>
+    <div class="nav-title"><img src="AIMEXLOGO.jpeg" alt="AIMEX-LOGO"></div>
 
-    <div class="menu" id="menuBtn">
-        <span></span>
-        <div class="menu-dropdown" id="menuDropdown">
-            <button id="homeBtn">Home</button>
-            <button id="aboutBtn">About</button>
-            <button id="eventsBtn">Events</button>
-            <button id="contactBtn">Contact</button>
+    <!-- RIGHT SIDE CONTAINER -->
+    <div class="right-container">
+        <div class="right-logo">
+            <img src="27.jpeg" alt="27-LOGO">
         </div>
-    </div>
-
-    <!-- RIGHT SIDE IMAGE -->
-    <div class="right-logo">
-        <img src="27.jpeg">
+        <!-- MENU BUTTON -->
+        <div class="menu" id="menuBtn">
+            <span></span>
+            <div class="menu-dropdown" id="menuDropdown">
+                <button id="homeBtn">Home</button>
+                <button id="galleryBtn">Gallery</button>
+                <button id="aboutBtn">About</button>
+                <button id="eventsBtn">Events</button>
+                <button id="contactBtn">Contact</button>
+            </div>
+        </div>
     </div>
 </nav>
 
@@ -325,14 +456,41 @@ footer{
 <section id="aboutSection">
     <div class="section-title">About AIMEX</div>
     <div class="about-frame">
-       The AIMEX event is a one-day technical symposium organized by the Department of Computer Science and Engineering (Artificial Intelligence and Machine Learning), which was established in the year 2023.
+AIMEX is the flagship technical fest of the Artificial Intelligence & Machine Learning Department, designed to ignite innovation, creativity, and technical excellence. The fest serves as a dynamic platform where technology meets imagination, bringing together students, innovators, and future technologists under one roof.
+AIMEX features a wide range of technical events including hackathons, coding challenges, AI model building, data science contests, and project expos that encourage real-time problem solving. Alongside technical events, the fest also hosts fun-filled games, workshops, quizzes, and interactive sessions to ensure an engaging experience for all participants.  </div>
+</section>
+
+<!-- EVENT HIGHLIGHTS - NOW SHOWS ALL 7 IMAGES -->
+<section id="eventHighlights">
+    <div class="image-scroller-frame">
+        <div class="scroller-title">Event Highlights</div>
+        <div class="image-scroller">
+            <div class="scroller-track">
+                <!-- First set of 7 images -->
+                <img src="image1.jpeg" alt="AIMEX Event 1">
+                <img src="image2.jpeg" alt="AIMEX Event 2">
+                <img src="image3.jpeg" alt="AIMEX Event 3">
+                <img src="image4.jpeg" alt="AIMEX Event 4">
+                <img src="image5.jpeg" alt="AIMEX Event 5">
+                <img src="image6.jpeg" alt="AIMEX Event 6">
+                <img src="image7.jpeg" alt="AIMEX Event 7">
+                <!-- Duplicate set of 7 images for seamless loop -->
+                <img src="image1.jpeg" alt="AIMEX Event 1">
+                <img src="image2.jpeg" alt="AIMEX Event 2">
+                <img src="image3.jpeg" alt="AIMEX Event 3">
+                <img src="image4.jpeg" alt="AIMEX Event 4">
+                <img src="image5.jpeg" alt="AIMEX Event 5">
+                <img src="image6.jpeg" alt="AIMEX Event 6">
+                <img src="image7.jpeg" alt="AIMEX Event 7">
+            </div>
+        </div>
     </div>
 </section>
 
 <section>
     <div class="section-title">About the Department</div>
     <div class="about-frame">
-        The Department of CSE (AI & ML) prepares students for future technologies.
+        At MITS, Deemed to be University, the Department of Artificial Intelligence and Machine Learning is committed to nurturing future-ready engineers with strong technical and analytical skills. The program focuses on building a solid foundation in AI, ML, Data Science, Neural Networks, and Deep Learning. Students gain hands-on experience through advanced laboratories, real-time projects, internships, and industry-oriented curriculum.
         <br>
         <a href="https://mits.ac.in/cse-ai-ml" target="_blank">
             <button class="dept-btn">Visit Department Site</button>
@@ -343,7 +501,8 @@ footer{
 <section>
     <div class="section-title">About Our College</div>
     <div class="about-frame">
-        <strong>Madanapalle Institute of Technology & Science (MITS)</strong>
+        <strong>Madanapalle Institute of Technology & Science (MITS) is a prestigious Deemed to be University located in Madanapalle, Andhra Pradesh. The institution is recognized for its academic excellence, innovation-driven education, and strong research culture. MITS offers a wide range of undergraduate, postgraduate, and doctoral programs in engineering, technology, management, and sciences.
+The university follows an outcome-based education system with a strong emphasis on practical learning and industry relevance. It is equipped with state-of-the-art infrastructure, advanced laboratories, smart classrooms, and modern research facilities. MITS has a highly qualified and experienced faculty who guide students toward academic and professional excellence.</strong>
         <br>
         <a href="https://mits.ac.in" target="_blank">
             <button class="college-btn">Visit College Website</button>
@@ -351,12 +510,23 @@ footer{
     </div>
 </section>
 
+<!-- UPDATED CONTACT SECTION -->
 <section class="contact" id="contactSection">
-    <div class="section-title">Contact Us</div>
-    <a href="https://mits.ac.in" target="_blank">🌐 www.mits.ac.in</a>
-    <a href="https://instagram.com/aimex_2k26" target="_blank">📸 Instagram: aimex_2k26</a>
-    <a href="mailto:aimex2k26@gmail.com">📧 Email: aimex2k26@gmail.com</a>
-    <a href="tel:1231231231">📞 Phone: 1231231231</a>
+    <div class="section-title">Reach Us</div>
+    <!-- MAP LOCATION IMAGE - Click to open Google Maps Directions from Current Location -->
+    <div class="map-container" onclick="openDirections()">
+        <img src="mainmap.jpeg" alt="MITS Location Map" class="map-image">
+    </div>
+    <div style="margin-top:20px; font-size:1.2rem; color:#ffd166;">
+        Madanapalle Institute of Technology & Science<br>
+        <span style="color:#4cc9f0; font-size:1rem;">PIN: 517 326, Andhra Pradesh</span>
+    </div>
+    <div style="margin-top:30px;">
+        <a href="https://mits.ac.in" target="_blank">🌐 www.mits.ac.in</a>
+        <a href="https://instagram.com/aimex_2k26" target="_blank">📸 Instagram: aimex_2k26</a>
+        <a href="mailto:aimex2k26@gmail.com">📧 Email: aimex2k26@gmail.com</a>
+        <a href="tel:1231231231">📞Phone:1231231231</a>
+    </div>
 </section>
 
 <footer>© 2026 AIMEX-MITS</footer>
@@ -366,9 +536,26 @@ menuBtn.onclick = () => menuDropdown.classList.toggle("show");
 
 eventsBtn.onclick = () => window.location.href = "eventslists.html";
 
+// GALLERY - PERFECT CENTER SCROLL
+galleryBtn.onclick = () => {
+    menuDropdown.classList.remove("show");
+    const element = document.getElementById("eventHighlights");
+    const navbarHeight = 120;
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = elementPosition - navbarHeight;
+    
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+    });
+};
+
 aboutBtn.onclick = () => {
     menuDropdown.classList.remove("show");
-    document.getElementById("aboutSection").scrollIntoView({ behavior: "smooth" });
+    document.getElementById("aboutSection").scrollIntoView({ 
+        behavior: "smooth",
+        block: "start"
+    });
 };
 
 homeBtn.onclick = () => {
@@ -380,6 +567,16 @@ contactBtn.onclick = () => {
     menuDropdown.classList.remove("show");
     document.getElementById("contactSection").scrollIntoView({ behavior: "smooth" });
 };
+
+// UPDATED FUNCTION - Open Google Maps Directions (Current Location → MITS)
+function openDirections() {
+    const mitsDestination = "Madanapalle Institute of Technology & Science, Angallu Road, Madanapalle, Andhra Pradesh 517326, India";
+    
+    // Google Maps URL with current location as origin (uses browser geolocation)
+    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=${encodeURIComponent(mitsDestination)}&travelmode=driving`;
+    
+    window.open(googleMapsUrl, '_blank');
+}
 </script>
 
 </body>
